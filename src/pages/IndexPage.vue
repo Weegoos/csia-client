@@ -28,17 +28,20 @@
       no-caps
       @click="addPlant"
     />
-    <q-btn
-      class="absolute-bottom-right q-ma-md"
-      style="background-color: #30322e"
-      round
-      icon="search"
-      @click="onClick"
-    />
+    <div class="q-ma-md absolute-bottom-right" style="z-index: 10">
+      <q-btn
+        style="background-color: #30322e"
+        round
+        icon="mdi-book-open-outline"
+        @click="pushToGuide"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { checkAccessToken } from "src/composables/javascript-function/token";
+import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 // global variables
@@ -50,6 +53,14 @@ const pushToNofications = () => {
 
 const addPlant = () => {
   router.push("/create-plant");
+};
+
+onMounted(() => {
+  checkAccessToken();
+});
+
+const pushToGuide = () => {
+  router.push("/guide");
 };
 </script>
 

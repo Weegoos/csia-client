@@ -57,8 +57,12 @@ const navigationButton = [
     link: "/plants",
   },
   {
-    icon: "eva-person-outline",
+    icon: "mdi-account",
     link: "/profile",
+  },
+  {
+    icon: "mdi-chat",
+    link: "/chatbot",
   },
 ];
 

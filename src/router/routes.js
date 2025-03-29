@@ -38,6 +38,14 @@ const routes = [
     path: "/create-plant",
     component: () => import("components/plants/CreatePlants.vue"),
   },
+  {
+    path: "/chatbot",
+    component: () => import("pages/ChatBot.vue"),
+  },
+  {
+    path: "/guide",
+    component: () => import("pages/GuidePage.vue"),
+  },
 
   // Always leave this as last one,
   // but you can also remove it
