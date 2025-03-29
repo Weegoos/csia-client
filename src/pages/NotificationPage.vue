@@ -9,7 +9,14 @@
       <section>
         <p class="text-h6 text-bold">Inbox</p>
       </section>
-      <q-intersection
+      <section
+        class="q-pa-sm"
+        style="background-color: #30322e; border-radius: 8px"
+      >
+        <p class="text-body2 text-bold">No messages yet</p>
+        <p>New messages will appear here</p>
+      </section>
+      <!-- <q-intersection
         v-for="index in 60"
         :key="index"
         transition="flip-right"
@@ -29,7 +36,7 @@
             <q-icon name="chat_bubble" color="green" />
           </q-item-section>
         </q-item>
-      </q-intersection>
+      </q-intersection> -->
     </div>
   </div>
 </template>
@@ -40,5 +47,7 @@ import { useRouter } from "vue-router";
 // global variables
 const router = useRouter();
 
-const pushToSettings = () => {};
+const pushToSettings = () => {
+  router.push("/notify-settings");
+};
 </script>
