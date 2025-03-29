@@ -2,7 +2,9 @@
 export default ({ app }) => {
   const serverURL = "http://localhost:8080/";
   const clientURL = "http://localhost:9000/#/";
+  const maxItemsPerPage = 10;
 
   app.config.globalProperties.$serverURL = serverURL;
   app.config.globalProperties.$clientURL = clientURL;
+  app.config.globalProperties.$maxItemsPerPage = maxItemsPerPage;
 };
