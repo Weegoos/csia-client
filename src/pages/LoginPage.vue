@@ -47,7 +47,7 @@
         rounded
         no-caps
         label="Sign in with email"
-        @click="register"
+        @click="login"
       />
       <q-btn
         color="black"
@@ -69,17 +69,14 @@ import { useRouter } from "vue-router";
 // global variables
 const router = useRouter();
 
-const text = ref("");
 const isPwd = ref(true);
-const fullName = ref("");
 const email = ref("");
 const password = ref("");
 const slide = ref("fullname");
 const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
-const register = () => {
+const login = () => {
   console.log("Registering with", {
-    fullName: fullName.value,
     email: email.value,
     password: password.value,
   });

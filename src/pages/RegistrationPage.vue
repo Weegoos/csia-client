@@ -115,7 +115,6 @@ import { useRouter } from "vue-router";
 // global variables
 const router = useRouter();
 
-const text = ref("");
 const isPwd = ref(true);
 const fullName = ref("");
 const email = ref("");
