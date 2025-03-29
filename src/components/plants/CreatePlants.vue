@@ -32,27 +32,53 @@
       </q-input>
     </section>
     <section>
-      <q-scroll-area style="width: 400px; height: 200px">
+      <q-scroll-area style="width: 100%; height: 75px">
         <div class="row no-wrap q-gutter-md">
-          <q-btn color="primary" rounded label="Все" @click="allPlant" />
-          <div v-for="n in 10" :key="n">
-            <q-btn color="primary" rounded label="OK" @click="onClick" />
+          <q-btn color="primary" rounded label="All" @click="allPlant" />
+          <div v-for="(btn, index) in allDifficulties" :key="index">
+            <q-btn color="primary" rounded :label="btn" @click="onClick" />
           </div>
         </div>
       </q-scroll-area>
+      <div>
+        <GetAllPlants />
+      </div>
     </section>
   </div>
 </template>
 
 <script setup>
+import { useQuasar } from "quasar";
+import { getMethod } from "src/composables/apiMethod/get";
+import { getCurrentInstance, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import GetAllPlants from "./GetAllPlants.vue";
 
 // global variables
 const router = useRouter();
+const { proxy } = getCurrentInstance();
+const serverURL = proxy.$serverURL;
+const $q = useQuasar();
 
 const pushToMainPage = () => {
   router.push("/");
 };
+
+const allDifficulties = ref([]);
+const getAllMethods = async () => {
+  await getMethod(
+    serverURL,
+    "plant/allDifficulties",
+    allDifficulties,
+    $q,
+    "Error: "
+  );
+  console.log(allDifficulties.value);
+};
+
+onMounted(async () => {
+  getAllMethods();
+});
 </script>
 
 <style scoped>
