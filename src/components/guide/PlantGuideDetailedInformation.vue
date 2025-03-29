@@ -43,7 +43,34 @@
             {{ allInformationAboutPlant.toxicity }}
           </p>
         </section>
-        <section class="sentences"></section>
+      </div>
+    </section>
+    <section class="sentences q-my-md q-pa-md">
+      <span class="text-h6 text-bold">Water</span>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #1a5276"
+          name="mdi-lightbulb"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.water
+        }}</span>
+      </div>
+    </section>
+    <section class="sentences q-my-md q-pa-md">
+      <span class="text-h6 text-bold">Light</span>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #d4ac0d"
+          name="mdi-weather-cloudy"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.light
+        }}</span>
       </div>
     </section>
   </div>
