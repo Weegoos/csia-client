@@ -112,11 +112,22 @@
         <q-icon
           class="q-pa-sm"
           style="border-radius: 54px; background-color: #e74c3c"
-          name="mdi-biohazard"
+          name="mdi-water-alert"
           size="20px"
         />
         <span class="q-ml-sm text-body2">{{
-          allInformationAboutPlant.characteristic.toxicity.toxicityTo
+          allInformationAboutPlant.characteristic.toxicity.toxicTo
+        }}</span>
+      </div>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #e74c3c"
+          name="mdi-skull"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.characteristic.toxicity.power
         }}</span>
       </div>
     </section>
@@ -126,11 +137,22 @@
         <q-icon
           class="q-pa-sm"
           style="border-radius: 54px; background-color: #95a5a6"
+          name="mdi-weather-pouring"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.characteristic.humidity.scale
+        }}</span>
+      </div>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #95a5a6"
           name="mdi-water-percent"
           size="20px"
         />
         <span class="q-ml-sm text-body2">{{
-          allInformationAboutPlant.humidity
+          allInformationAboutPlant.characteristic.humidity.ratio
         }}</span>
       </div>
     </section>
@@ -143,9 +165,12 @@
           name="mdi-seed"
           size="20px"
         />
-        <span class="q-ml-sm text-body2">{{
-          allInformationAboutPlant.common_problems
-        }}</span>
+        <span class="q-ml-sm text-body2"
+          >{{ allInformationAboutPlant.characteristic.common_problems.name }} -
+          <span>{{
+            allInformationAboutPlant.characteristic.common_problems.detail
+          }}</span>
+        </span>
       </div>
     </section>
     <section class="sentences q-my-md q-pa-md">
@@ -157,9 +182,12 @@
           name="mdi-seed"
           size="20px"
         />
-        <span class="q-ml-sm text-body2">{{
-          allInformationAboutPlant.common_pests
-        }}</span>
+        <span class="q-ml-sm text-body2"
+          >{{ allInformationAboutPlant.characteristic.common_pests.name }} -
+          <span>{{
+            allInformationAboutPlant.characteristic.common_pests.detail
+          }}</span>
+        </span>
       </div>
     </section>
     <section class="sentences q-my-md q-pa-md">
@@ -172,9 +200,122 @@
           size="20px"
         />
         <span class="q-ml-sm text-body2">{{
-          allInformationAboutPlant.liquid_fertilizing
+          allInformationAboutPlant.characteristic.liquid_fertilizing
         }}</span>
       </div>
+    </section>
+    <section class="sentences q-my-md q-pa-md">
+      <span class="text-h6 text-bold">Hardiness</span>
+      <q-list>
+        <q-item clickable v-ripple>
+          <q-item-section avatar>
+            <q-icon
+              color="white"
+              style="background-color: #52be80; border-radius: 54px"
+              name="mdi-thermometer"
+              class="q-pa-sm"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label
+              class="text-white text-bold text-body1"
+              caption
+              lines="2"
+              >{{
+                allInformationAboutPlant.characteristic.temperatures.start
+              }}°C
+            </q-item-label>
+            <q-item-label class="text-white text-body2" caption lines="2">
+              Lowest temp.
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable v-ripple>
+          <q-item-section avatar>
+            <q-icon
+              color="white"
+              style="background-color: #52be80; border-radius: 54px"
+              name="mdi-thermometer"
+              class="q-pa-sm"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label
+              class="text-white text-bold text-body1"
+              caption
+              lines="2"
+              >{{ allInformationAboutPlant.characteristic.temperatures.end }}°C
+            </q-item-label>
+            <q-item-label class="text-white text-body2" caption lines="2">
+              Highest temp.
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-item-label class="text-h6 text-grey">Indoor months</q-item-label>
+            <q-item-label lines="2">{{
+              allInformationAboutPlant.characteristic.temperatures.indoorMonths
+            }}</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-item-label class="text-h6 text-grey"
+              >Outdoor months</q-item-label
+            >
+            <q-item-label lines="2">{{
+              allInformationAboutPlant.characteristic.temperatures.outDoorMonths
+            }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </section>
+    <section class="sentences q-my-md q-pa-md">
+      <span class="text-h6 text-bold">Clean</span>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #f1948a"
+          name="mdi-broom"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.characteristic.clean
+        }}</span>
+      </div>
+    </section>
+    <section class="sentences q-my-md q-pa-md">
+      <span class="text-h6 text-bold">Leaves</span>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #239b56"
+          name="mdi-leaf"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.characteristic.leaves.type
+        }}</span>
+      </div>
+      <q-item>
+        <q-item-section>
+          <q-item-label class="text-h6 text-grey">Leaf color</q-item-label>
+          <q-item-label
+            class="q-pa-sm"
+            lines="2"
+            style="
+              border: solid white 1px;
+              border-radius: 54px;
+              width: 75px;
+              text-align: center;
+            "
+            >{{
+              allInformationAboutPlant.characteristic.leaves.color
+            }}</q-item-label
+          >
+        </q-item-section>
+      </q-item>
     </section>
   </div>
 </template>
