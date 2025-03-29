@@ -19,15 +19,23 @@
         </q-page>
       </q-page-container>
       <q-footer
-        v-model="footer"
         reveal
         elevated
         style="background-color: #30222e"
+        align="center"
       >
-        <q-toolbar class="text-white" style="background-color: #30222e">
-          <div class="row q-mr-sm">
-            <div class="col">
-              <q-btn flat round dense icon="assignment_ind" />
+        <q-toolbar
+          class="text-white justify-center"
+          style="background-color: #30222e"
+        >
+          <div class="row q-gutter-xl q-pa-sm justify-center items-center">
+            <div
+              class="col-auto"
+              v-for="(button, index) in navigationButton"
+              :key="index"
+              @click="navigateTo(button.link)"
+            >
+              <q-btn round :icon="button.icon" class="q-mr-xs text-green" />
             </div>
           </div>
         </q-toolbar>
@@ -36,6 +44,29 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const navigationButton = [
+  {
+    icon: "mdi-home-outline",
+    link: "/",
+  },
+  {
+    icon: "mdi-leaf",
+    link: "/plants",
+  },
+  {
+    icon: "eva-person-outline",
+    link: "/profile",
+  },
+];
+
+const router = useRouter();
+const navigateTo = (link) => {
+  router.push(link);
+};
+</script>
 
 <style></style>
