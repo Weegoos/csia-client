@@ -63,23 +63,38 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import axios from "axios";
+import { Cookies } from "quasar";
+import { getCurrentInstance, ref } from "vue";
 import { useRouter } from "vue-router";
 
 // global variables
 const router = useRouter();
+const { proxy } = getCurrentInstance();
+const serverURL = proxy.$serverURL;
 
 const isPwd = ref(true);
 const email = ref("");
 const password = ref("");
-const slide = ref("fullname");
-const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
-const login = () => {
-  console.log("Registering with", {
+const login = async () => {
+  const payload = {
     email: email.value,
     password: password.value,
-  });
+  };
+  try {
+    const response = await axios.post(`${serverURL}auth/login`, payload, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    console.log(response.data);
+    Cookies.set("accessToken", response.data.accessToken);
+    Cookies.set("refreshToken", response.data.refreshToken);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const pushToRegistration = () => {
