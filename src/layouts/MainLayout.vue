@@ -35,7 +35,13 @@
               :key="index"
               @click="navigateTo(button.link)"
             >
-              <q-btn round :icon="button.icon" class="q-mr-xs text-green" />
+              <q-btn
+                :color="fullPath === button.link ? 'green-4' : ''"
+                round
+                :icon="button.icon"
+                class="q-mr-xs"
+                :class="fullPath === button.link ? 'text-white' : 'text-green'"
+              />
             </div>
           </div>
         </q-toolbar>
@@ -45,8 +51,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+// global variables
+const router = useRouter();
+const route = useRoute();
 
 const navigationButton = [
   {
@@ -63,7 +73,14 @@ const navigationButton = [
   },
 ];
 
-const router = useRouter();
+const fullPath = ref(route.fullPath);
+
+watch(
+  () => route.fullPath,
+  (newPath) => {
+    fullPath.value = newPath;
+  }
+);
 const navigateTo = (link) => {
   router.push(link);
 };
