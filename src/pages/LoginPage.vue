@@ -64,7 +64,8 @@
 
 <script setup>
 import axios from "axios";
-import { Cookies } from "quasar";
+import { Cookies, useQuasar } from "quasar";
+import { useNotifyStore } from "src/stores/notify-store";
 import { getCurrentInstance, ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -72,6 +73,8 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const { proxy } = getCurrentInstance();
 const serverURL = proxy.$serverURL;
+const notifyStore = useNotifyStore();
+const $q = useQuasar();
 
 const isPwd = ref(true);
 const email = ref("");
@@ -92,6 +95,8 @@ const login = async () => {
     console.log(response.data);
     Cookies.set("accessToken", response.data.accessToken);
     Cookies.set("refreshToken", response.data.refreshToken);
+    notifyStore.nofifySuccess($q, "The user has successfully logged in");
+    router.push("/");
   } catch (error) {
     console.error(error);
   }

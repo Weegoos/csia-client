@@ -109,25 +109,43 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import axios from "axios";
+import { useQuasar } from "quasar";
+import { useNotifyStore } from "src/stores/notify-store";
+import { getCurrentInstance, ref } from "vue";
 import { useRouter } from "vue-router";
 
 // global variables
 const router = useRouter();
+const { proxy } = getCurrentInstance();
+const serverURL = proxy.$serverURL;
+const notifyStore = useNotifyStore();
+const $q = useQuasar();
 
 const isPwd = ref(true);
 const fullName = ref("");
 const email = ref("");
 const password = ref("");
 const slide = ref("fullname");
-const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
-const register = () => {
-  console.log("Registering with", {
-    fullName: fullName.value,
+const register = async () => {
+  const payload = {
     email: email.value,
     password: password.value,
-  });
+    fio: fullName.value,
+  };
+  try {
+    const response = await axios.post(`${serverURL}auth/signup`, payload, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    console.log(response.data);
+    notifyStore.nofifySuccess($q, response.data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const pushToLogin = () => {
