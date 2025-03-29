@@ -78,7 +78,7 @@ const allDifficulties = ref([]);
 const getAllMethods = async () => {
   await getMethod(
     serverURL,
-    "plant/allDifficulties",
+    "params/allDifficulties",
     allDifficulties,
     $q,
     "Error: "
