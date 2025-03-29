@@ -12,7 +12,7 @@
     </section>
     <section class="sentences q-pa-sm q-my-md">
       <span class="text-body2 text-white">
-        {{ allInformationAboutPlant.temperatures.sentence }}
+        {{ allInformationAboutPlant.characteristic.temperatures.sentence }}
       </span>
       <br />
       <br />
@@ -28,19 +28,19 @@
         <section class="col sentences q-pt-md" dense align="center">
           <q-icon name="mdi-thermometer" size="24px" />
           <p class="text-subtitle1">
-            {{ allInformationAboutPlant.light }}
+            {{ allInformationAboutPlant.characteristic.humidity.scale }}
           </p>
         </section>
         <section class="col sentences q-pt-md" dense align="center">
           <q-icon name="mdi-water" size="24px" />
           <p class="text-subtitle1">
-            {{ allInformationAboutPlant.difficulty }}
+            {{ allInformationAboutPlant.characteristic.water.difficulty }}
           </p>
         </section>
         <section class="col sentences q-pt-md" dense align="center">
           <q-icon name="mdi-fire-alert" size="24px" />
           <p class="text-subtitle1">
-            {{ allInformationAboutPlant.toxicity }}
+            {{ allInformationAboutPlant.characteristic.toxicity.toxicTo }}
           </p>
         </section>
       </div>
@@ -51,11 +51,33 @@
         <q-icon
           class="q-pa-sm"
           style="border-radius: 54px; background-color: #1a5276"
-          name="mdi-lightbulb"
+          name="mdi-water-plus"
           size="20px"
         />
         <span class="q-ml-sm text-body2">{{
-          allInformationAboutPlant.water
+          allInformationAboutPlant.characteristic.water.when
+        }}</span>
+      </div>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #1a5276"
+          name="mdi-water-check"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.characteristic.water.tip
+        }}</span>
+      </div>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #1a5276"
+          name="mdi-water-outline "
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.characteristic.water.difficulty
         }}</span>
       </div>
     </section>
@@ -65,11 +87,92 @@
         <q-icon
           class="q-pa-sm"
           style="border-radius: 54px; background-color: #d4ac0d"
-          name="mdi-weather-cloudy"
+          name="mdi-lightbulb-on"
           size="20px"
         />
         <span class="q-ml-sm text-body2">{{
-          allInformationAboutPlant.light
+          allInformationAboutPlant.characteristic.light.preferredLight
+        }}</span>
+      </div>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #d4ac0d"
+          name="mdi-lightbulb"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.characteristic.light.preferredLight
+        }}</span>
+      </div>
+    </section>
+    <section class="sentences q-my-md q-pa-md">
+      <span class="text-h6 text-bold">Toxicity</span>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #e74c3c"
+          name="mdi-biohazard"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.characteristic.toxicity.toxicityTo
+        }}</span>
+      </div>
+    </section>
+    <section class="sentences q-my-md q-pa-md">
+      <span class="text-h6 text-bold">Humidity</span>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #95a5a6"
+          name="mdi-water-percent"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.humidity
+        }}</span>
+      </div>
+    </section>
+    <section class="sentences q-my-md q-pa-md">
+      <span class="text-h6 text-bold">Common Problems</span>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #922b21"
+          name="mdi-seed"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.common_problems
+        }}</span>
+      </div>
+    </section>
+    <section class="sentences q-my-md q-pa-md">
+      <span class="text-h6 text-bold">Common Pests</span>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #922b21"
+          name="mdi-seed"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.common_pests
+        }}</span>
+      </div>
+    </section>
+    <section class="sentences q-my-md q-pa-md">
+      <span class="text-h6 text-bold">Liguid Fertilizing</span>
+      <div class="q-py-sm">
+        <q-icon
+          class="q-pa-sm"
+          style="border-radius: 54px; background-color: #9a7d0a"
+          name="mdi-sprout"
+          size="20px"
+        />
+        <span class="q-ml-sm text-body2">{{
+          allInformationAboutPlant.liquid_fertilizing
         }}</span>
       </div>
     </section>
