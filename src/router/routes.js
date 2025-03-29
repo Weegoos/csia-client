@@ -34,6 +34,10 @@ const routes = [
     path: "/notify-settings",
     component: () => import("components/notification/NotificationSettings.vue"),
   },
+  {
+    path: "/create-plant",
+    component: () => import("components/plants/CreatePlants.vue"),
+  },
 
   // Always leave this as last one,
   // but you can also remove it
