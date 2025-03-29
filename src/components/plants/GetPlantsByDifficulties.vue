@@ -1,11 +1,11 @@
 <template>
-  <div class="text-white">
+  <div>
     <q-intersection transition="flip-right" class="example-item">
       <q-list bordered>
         <q-item
           clickable
           v-ripple
-          v-for="(plant, index) in allPlants.content"
+          v-for="(plant, index) in props.plantInfo.content"
           :key="index"
         >
           <q-item-section avatar>
@@ -18,18 +18,9 @@
             <q-item-label class="text-white" caption lines="2">{{
               plant.temperatures.sentence
             }}</q-item-label>
-            <q-item-label class="text-white" caption lines="2">
-              <q-btn
-                color="green-4"
-                dense
-                flat
-                no-caps
-                :label="plant.difficulty"
-                @click="onClick"
-              />
-            </q-item-label>
           </q-item-section>
-          <q-item-section side center>
+          <q-item-section side top>
+            <q-item-label caption>5 min ago</q-item-label>
             <q-icon name="mdi-arrow-right" color="white" />
           </q-item-section>
         </q-item>
@@ -39,7 +30,7 @@
 </template>
 
 <script setup>
-import { QBtn, useQuasar } from "quasar";
+import { useQuasar } from "quasar";
 import { getMethod } from "src/composables/apiMethod/get";
 import { getCurrentInstance, onMounted, ref } from "vue";
 
@@ -48,21 +39,12 @@ const { proxy } = getCurrentInstance();
 const serverURL = proxy.$serverURL;
 const $q = useQuasar();
 
-const allPlants = ref([]);
-
-const getAllPlants = async () => {
-  await getMethod(
-    serverURL,
-    `plant/allPlants?page=0&size=10`,
-    allPlants,
-    $q,
-    "Error: "
-  );
-};
-
-onMounted(() => {
-  getAllPlants();
+const props = defineProps({
+  plantInfo: {
+    type: Object,
+    required: true,
+  },
 });
 </script>
 
-<style scoped></style>
+<style></style>
