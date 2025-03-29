@@ -59,26 +59,80 @@
         label="Sign up with email"
         @click="register"
       />
+      <q-btn
+        color="black"
+        style="width: 100%"
+        rounded
+        no-caps
+        class="q-my-md"
+        label="Sign in with email"
+        @click="pushToLogin"
+      />
+    </section>
+    <section>
+      <q-carousel
+        v-model="slide"
+        vertical
+        transition-prev="slide-down"
+        transition-next="slide-up"
+        animated
+        infinite
+        autoplay
+        :autoplay-interval="3000"
+        height="150px"
+        width="100%"
+        class="bg-black text-white shadow-1 rounded-borders"
+      >
+        <q-carousel-slide name="fullname" class="column no-wrap flex-center">
+          <q-icon name="mdi-account" size="56px" />
+
+          <div class="q-mt-md text-center">
+            Be sure to write the full name for the accuracy of the information.
+          </div>
+        </q-carousel-slide>
+        <q-carousel-slide name="email" class="column no-wrap flex-center">
+          <q-icon name="email" size="56px" />
+          <div class="q-mt-md text-center">
+            Use work email to work with the app.
+          </div>
+        </q-carousel-slide>
+        <q-carousel-slide name="password" class="column no-wrap flex-center">
+          <q-icon name="mdi-lock-outline" size="56px" />
+
+          <div class="q-mt-md text-center">
+            The password must consist of 6 characters.
+          </div>
+        </q-carousel-slide>
+      </q-carousel>
     </section>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+// global variables
+const router = useRouter();
 
 const text = ref("");
-
 const isPwd = ref(true);
 const fullName = ref("");
 const email = ref("");
 const password = ref("");
+const slide = ref("fullname");
+const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
 const register = () => {
   console.log("Registering with", {
     fullName: fullName.value,
     email: email.value,
     password: password.value,
   });
-  // Add your registration logic here
+};
+
+const pushToLogin = () => {
+  router.push("/login");
 };
 </script>
 
