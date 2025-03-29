@@ -49,6 +49,13 @@
           </q-item>
         </q-list>
       </q-intersection>
+      <q-pagination
+        class="justify-center text-white"
+        v-model="current"
+        :min="0"
+        :max="maxPage"
+        @update:model-value="pagination"
+      />
     </section>
   </div>
 </template>
@@ -56,7 +63,7 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { getMethod } from "src/composables/apiMethod/get";
-import { getCurrentInstance, onMounted, ref } from "vue";
+import { getCurrentInstance, onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 
 // global variables
@@ -70,18 +77,42 @@ const pushToMainPage = () => {
 };
 
 const plantInfo = ref([]);
-const getAllPlants = async () => {
+const getAllPlants = async (page) => {
   await getMethod(
     serverURL,
-    `plant/allPlants?page=0&size=10`,
+    `plant/allPlants?page=${page}&size=10`,
     plantInfo,
     $q,
     "Error: "
   );
+
+  console.log(page);
 };
 
-onMounted(async () => {
-  getAllPlants();
+// pagination
+const current = ref(0);
+const pagination = (page) => {
+  console.log("Текущая страница:", page);
+  current.value = page;
+  console.log(current.value);
+
+  getAllPlants(current.value);
+};
+
+const maxPage = ref("");
+watch(
+  () => plantInfo.value,
+  (newVal) => {
+    if (newVal && newVal.page.size) {
+      maxPage.value = Math.floor(newVal.page.totalElements / 10);
+    } else {
+      maxPage.value = 1;
+    }
+  }
+);
+
+onMounted(() => {
+  getAllPlants(current.value);
 });
 </script>
 
