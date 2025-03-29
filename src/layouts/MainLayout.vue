@@ -1,18 +1,6 @@
 <template>
   <div>
     <q-layout view="hHr LpR lFf" container style="height: 100vh">
-      <q-header reveal elevated class="bg-black">
-        <q-toolbar class="bg-black text-white">
-          <q-toolbar-title> Planta </q-toolbar-title>
-          <q-btn
-            round
-            dense
-            icon="notifications"
-            color="green-4"
-            class="q-mr-xs"
-          />
-        </q-toolbar>
-      </q-header>
       <q-page-container>
         <q-page padding>
           <router-view />
@@ -23,6 +11,7 @@
         elevated
         style="background-color: #30222e"
         align="center"
+        v-if="!isAuthPage"
       >
         <q-toolbar
           class="text-white justify-center"
@@ -51,7 +40,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 // global variables
@@ -81,6 +70,10 @@ watch(
     fullPath.value = newPath;
   }
 );
+const isAuthPage = computed(() => {
+  return route.path === "/registration" || route.path === "/login";
+});
+
 const navigateTo = (link) => {
   router.push(link);
 };
