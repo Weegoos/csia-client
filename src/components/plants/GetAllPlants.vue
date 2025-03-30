@@ -35,12 +35,11 @@
         </q-item>
       </q-list>
     </q-intersection>
-    <CreatePlant :plantInfo="plantInfo" />
   </div>
 </template>
 
 <script setup>
-import { QBtn, useQuasar } from "quasar";
+import { LocalStorage, QBtn, useQuasar } from "quasar";
 import { getMethod } from "src/composables/apiMethod/get";
 import { getCurrentInstance, onMounted, ref } from "vue";
 import CreatePlant from "./CreatePlant.vue";
@@ -68,11 +67,9 @@ onMounted(() => {
   getAllPlants();
 });
 
-const plantInfo = ref([]);
 const openCreatePlant = (info) => {
-  console.log(info);
-  plantInfo.value = info;
   router.push("/add-plant");
+  LocalStorage.set("plantInfo", info.name);
 };
 </script>
 
