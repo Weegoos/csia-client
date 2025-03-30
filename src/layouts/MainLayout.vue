@@ -57,10 +57,6 @@ const navigationButton = [
     link: "/plants",
   },
   {
-    icon: "mdi-account",
-    link: "/profile",
-  },
-  {
     icon: "mdi-chat",
     link: "/chatbot",
   },

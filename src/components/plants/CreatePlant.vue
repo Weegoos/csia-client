@@ -251,7 +251,7 @@ const createPlant = async () => {
         formattedDateForCollectionTime.value =
           combinedDateForCollection.toISOString();
         const payload = {
-          customName: customName.value,
+          custom_name: customName.value,
           email: info.email,
           plant_name: LocalStorage.getItem("plantInfo"),
           plantTime: formattedDateForPlantTime.value,

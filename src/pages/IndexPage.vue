@@ -20,7 +20,7 @@
     <section
       class="q-pa-sm q-my-md"
       style="background-color: #30322e; border-radius: 8px"
-      v-if="allMyPlants == []"
+      v-if="allMyPlants.content <= []"
     >
       <p class="text-body2 text-bold">Add your first plant</p>
       <p>
@@ -79,6 +79,7 @@
     <ViewDetailedInformationAboutPlant
       :openWindow="openWindow"
       :allInfoAboutPlant="allInfoAboutPlant"
+      @closeWindow="closeWindow"
     />
   </div>
 </template>
@@ -115,6 +116,10 @@ const openWindow = ref(false);
 const openDetailedMyPlant = (info) => {
   allInfoAboutPlant.value = info;
   openWindow.value = true;
+};
+
+const closeWindow = () => {
+  openWindow.value = false;
 };
 
 const allMyPlants = ref([]);
