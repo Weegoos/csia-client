@@ -58,6 +58,15 @@
           </q-item>
         </q-list>
       </div>
+      <q-pagination
+        class="justify-center"
+        v-model="current"
+        color="green-4"
+        :min="1"
+        :max="maxPage"
+        @update:model-value="pagination"
+        :boundary-numbers="true"
+      />
     </section>
     <q-btn
       color="green-4 q-mt-md"
@@ -79,13 +88,14 @@ import { useQuasar } from "quasar";
 import ViewDetailedInformationAboutPlant from "src/components/myPlant.vue/ViewDetailedInformationAboutPlant.vue";
 import { getMethod } from "src/composables/apiMethod/get";
 import { checkAccessToken } from "src/composables/javascript-function/token";
-import { getCurrentInstance, onMounted, ref } from "vue";
+import { getCurrentInstance, onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 
 // global variables
 const router = useRouter();
 const { proxy } = getCurrentInstance();
 const serverURL = proxy.$serverURL;
+const maxItemsPerPage = proxy.$maxItemsPerPage;
 const $q = useQuasar();
 
 const pushToNofications = () => {
@@ -108,10 +118,10 @@ const openDetailedMyPlant = (info) => {
 };
 
 const allMyPlants = ref([]);
-const getAllMyPlants = async () => {
+const getAllMyPlants = async (page) => {
   await getMethod(
     serverURL,
-    `user/myPlants?page=0&size=10`,
+    `user/myPlants?page=${page}&size=${maxItemsPerPage}`,
     allMyPlants,
     $q,
     "Error: "
@@ -120,8 +130,30 @@ const getAllMyPlants = async () => {
   console.log(allMyPlants.value);
 };
 
+// pagination
+const current = ref(1);
+const pagination = (page) => {
+  console.log("Текущая страница:", page);
+  current.value = page;
+  console.log(current.value);
+
+  getAllMyPlants(current.value - 1);
+};
+
+const maxPage = ref("");
+watch(
+  () => allMyPlants.value,
+  (newVal) => {
+    if (newVal && newVal.page.size) {
+      maxPage.value = Math.ceil(newVal.page.totalElements / newVal.page.size);
+    } else {
+      maxPage.value = 1;
+    }
+  }
+);
+
 onMounted(() => {
-  getAllMyPlants();
+  getAllMyPlants(current.value - 1);
   checkAccessToken();
 });
 </script>
