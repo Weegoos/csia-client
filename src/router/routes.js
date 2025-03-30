@@ -35,6 +35,10 @@ const routes = [
     component: () => import("components/notification/NotificationSettings.vue"),
   },
   {
+    path: "/profile-settings",
+    component: () => import("components/profile/SettingsPageForProfile.vue"),
+  },
+  {
     path: "/create-plant",
     component: () => import("src/components/plants/ViewPlant.vue"),
   },

@@ -3,7 +3,7 @@
     <q-btn icon="settings" round @click="pushToSettings" />
   </div>
   <div class="q-col-gutter-md row items-start">
-    <div class="col-6 q-my-sm">
+    <div class="col q-my-sm">
       <q-img style="border-radius: 5px" :src="img" no-native-menu> </q-img>
     </div>
   </div>
@@ -86,6 +86,10 @@ const getUserImg = async () => {
   } catch (error) {
     console.log("Ошибка получения изображения:", error);
   }
+};
+
+const pushToSettings = () => {
+  router.push("/profile-settings");
 };
 
 onMounted(() => {
