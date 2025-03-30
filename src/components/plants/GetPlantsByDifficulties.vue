@@ -16,7 +16,7 @@
               plant.name
             }}</q-item-label>
             <q-item-label class="text-white" caption lines="2">{{
-              plant.temperatures.sentence
+              plant.characteristic.temperatures.sentence
             }}</q-item-label>
           </q-item-section>
           <q-item-section side top>

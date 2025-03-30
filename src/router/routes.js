@@ -36,7 +36,7 @@ const routes = [
   },
   {
     path: "/create-plant",
-    component: () => import("components/plants/CreatePlants.vue"),
+    component: () => import("src/components/plants/ViewPlant.vue"),
   },
   {
     path: "/chatbot",

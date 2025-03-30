@@ -70,6 +70,8 @@ const serverURL = proxy.$serverURL;
 const $q = useQuasar();
 const allPage = ref(true);
 
+const search = ref("");
+
 const pushToMainPage = () => {
   router.push("/");
 };

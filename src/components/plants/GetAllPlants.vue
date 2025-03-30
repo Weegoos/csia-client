@@ -7,6 +7,7 @@
           v-ripple
           v-for="(plant, index) in allPlants.content"
           :key="index"
+          @click="openCreatePlant(plant)"
         >
           <q-item-section avatar>
             <q-icon color="green-4" name="mdi-leaf" />
@@ -16,7 +17,7 @@
               plant.name
             }}</q-item-label>
             <q-item-label class="text-white" caption lines="2">{{
-              plant.temperatures.sentence
+              plant.characteristic.temperatures.sentence
             }}</q-item-label>
             <q-item-label class="text-white" caption lines="2">
               <q-btn
@@ -25,7 +26,6 @@
                 flat
                 no-caps
                 :label="plant.difficulty"
-                @click="onClick"
               />
             </q-item-label>
           </q-item-section>
@@ -35,6 +35,7 @@
         </q-item>
       </q-list>
     </q-intersection>
+    <CreatePlant :plantInfo="plantInfo" />
   </div>
 </template>
 
@@ -42,6 +43,7 @@
 import { QBtn, useQuasar } from "quasar";
 import { getMethod } from "src/composables/apiMethod/get";
 import { getCurrentInstance, onMounted, ref } from "vue";
+import CreatePlant from "./CreatePlant.vue";
 
 // global variables
 const { proxy } = getCurrentInstance();
@@ -63,6 +65,12 @@ const getAllPlants = async () => {
 onMounted(() => {
   getAllPlants();
 });
+
+const plantInfo = ref([]);
+const openCreatePlant = (info) => {
+  console.log(info);
+  plantInfo.value = info;
+};
 </script>
 
 <style scoped></style>
