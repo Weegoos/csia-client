@@ -46,6 +46,10 @@ const routes = [
     path: "/guide",
     component: () => import("pages/GuidePage.vue"),
   },
+  {
+    path: "/add-plant",
+    component: () => import("components/plants/CreatePlant.vue"),
+  },
 
   // Always leave this as last one,
   // but you can also remove it

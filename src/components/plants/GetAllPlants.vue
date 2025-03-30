@@ -44,11 +44,13 @@ import { QBtn, useQuasar } from "quasar";
 import { getMethod } from "src/composables/apiMethod/get";
 import { getCurrentInstance, onMounted, ref } from "vue";
 import CreatePlant from "./CreatePlant.vue";
+import { useRouter } from "vue-router";
 
 // global variables
 const { proxy } = getCurrentInstance();
 const serverURL = proxy.$serverURL;
 const $q = useQuasar();
+const router = useRouter();
 
 const allPlants = ref([]);
 
@@ -70,6 +72,7 @@ const plantInfo = ref([]);
 const openCreatePlant = (info) => {
   console.log(info);
   plantInfo.value = info;
+  router.push("/add-plant");
 };
 </script>
 
