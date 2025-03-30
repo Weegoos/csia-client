@@ -27,10 +27,6 @@ const routes = [
     component: () => import("pages/NotificationPage.vue"),
   },
   {
-    path: "/settings",
-    component: () => import("pages/SettingsPage.vue"),
-  },
-  {
     path: "/notify-settings",
     component: () => import("components/notification/NotificationSettings.vue"),
   },
