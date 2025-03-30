@@ -177,7 +177,9 @@
 </template>
 
 <script setup>
-import { useQuasar } from "quasar";
+import { Cookies, useQuasar } from "quasar";
+import axios from "axios";
+import { patchMethod } from "src/composables/apiMethod/patch";
 import { postMethod } from "src/composables/apiMethod/post";
 import { getCurrentInstance, ref, watch } from "vue";
 
@@ -218,17 +220,21 @@ const edit = async () => {
   const payload = {
     custom_name: props.allInfoAboutPlant.custom_name,
     humidity: humidity.value,
-    temperatureGround: humidity.value,
+    temperatureGround: temperatureGround.value,
     temperatureAir: temperatureAir.value,
     height: height.value,
   };
   try {
-    await postMethod(
-      serverURL,
-      "user/indicate",
+    await axios.patch(
+      `${serverURL}user/indicate`, // Скорректированный URL
       payload,
-      $q,
-      "Indicators are edited"
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${Cookies.get("accessToken")}`, // Проверяем токен
+        },
+      }
     );
   } catch (error) {
     console.log(error);
