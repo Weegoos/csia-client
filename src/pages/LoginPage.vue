@@ -1,5 +1,8 @@
 <template>
-  <div class="q-pa-md bg-black">
+  <div
+    class="q-pa-md bg-black"
+    :class="$q.screen.width > mobileWidth ? 'fixed-center' : ''"
+  >
     <section class="text-white q-mb-md">
       <p class="text-h5 text-bold">Log in to the system</p>
       <p class="text-body2">
@@ -73,6 +76,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const { proxy } = getCurrentInstance();
 const serverURL = proxy.$serverURL;
+const mobileWidth = proxy.$mobileWidth;
 const notifyStore = useNotifyStore();
 const $q = useQuasar();
 
