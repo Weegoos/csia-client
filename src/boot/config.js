@@ -1,6 +1,6 @@
 // src/boot/config.js
 export default ({ app }) => {
-  const serverURL = "http://localhost:8080/";
+  const serverURL = "https://csia-back.onrender.com/user/";
   const clientURL = "http://localhost:9000/#/";
   const maxItemsPerPage = 10;
   const mobileWidth = 800;

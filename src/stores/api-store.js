@@ -15,14 +15,17 @@ export const useApiStore = defineStore("api", {
       const $q = useQuasar();
       // notifyStore.loading($q, "Данные загружаются...", QSpinnerGears);
       try {
-        const response = await axios.get("http://localhost:8080/user/profile", {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${Cookies.get("accessToken")}`,
-          },
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          "https://csia-back.onrender.com/user/profile",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${Cookies.get("accessToken")}`,
+            },
+            withCredentials: true,
+          }
+        );
         this.userData = response.data;
         console.log(response.data);
       } catch (error) {
