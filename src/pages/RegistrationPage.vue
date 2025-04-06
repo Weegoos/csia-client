@@ -1,5 +1,8 @@
 <template>
-  <div class="q-pa-md bg-black">
+  <div
+    class="q-pa-md bg-black"
+    :class="$q.screen.width > mobileWidth ? 'fixed-center' : ''"
+  >
     <section class="text-white q-mb-md">
       <p class="text-h5 text-bold">Create account with email</p>
       <p class="text-body2">Enter your details below to create your account</p>
@@ -108,48 +111,63 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import axios from "axios";
 import { useQuasar } from "quasar";
 import { useNotifyStore } from "src/stores/notify-store";
 import { getCurrentInstance, ref } from "vue";
 import { useRouter } from "vue-router";
+export default {
+  setup() {
+    // global variables
+    const router = useRouter();
+    const { proxy } = getCurrentInstance();
+    const serverURL = proxy.$serverURL;
+    const mobileWidth = proxy.$mobileWidth;
+    const notifyStore = useNotifyStore();
+    const $q = useQuasar();
 
-// global variables
-const router = useRouter();
-const { proxy } = getCurrentInstance();
-const serverURL = proxy.$serverURL;
-const notifyStore = useNotifyStore();
-const $q = useQuasar();
+    const isPwd = ref(true);
+    const fullName = ref("");
+    const email = ref("");
+    const password = ref("");
+    const slide = ref("fullname");
 
-const isPwd = ref(true);
-const fullName = ref("");
-const email = ref("");
-const password = ref("");
-const slide = ref("fullname");
+    const register = async () => {
+      const payload = {
+        email: email.value,
+        password: password.value,
+        fio: fullName.value,
+      };
+      try {
+        const response = await axios.post(`${serverURL}auth/signup`, payload, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+        console.log(response.data);
+        notifyStore.nofifySuccess($q, response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-const register = async () => {
-  const payload = {
-    email: email.value,
-    password: password.value,
-    fio: fullName.value,
-  };
-  try {
-    const response = await axios.post(`${serverURL}auth/signup`, payload, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    console.log(response.data);
-    notifyStore.nofifySuccess($q, response.data);
-  } catch (error) {
-    console.error(error);
-  }
-};
+    const pushToLogin = () => {
+      router.push("/login");
+    };
 
-const pushToLogin = () => {
-  router.push("/login");
+    return {
+      mobileWidth,
+      isPwd,
+      fullName,
+      email,
+      password,
+      slide,
+      register,
+      pushToLogin,
+    };
+  },
 };
 </script>
 
