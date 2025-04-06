@@ -84,83 +84,105 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { useQuasar } from "quasar";
-import ViewDetailedInformationAboutPlant from "src/components/myPlant.vue/ViewDetailedInformationAboutPlant.vue";
 import { getMethod } from "src/composables/apiMethod/get";
+import ViewDetailedInformationAboutPlant from "../components/myPlant/ViewDetailedInformationAboutPlant.vue";
 import { checkAccessToken } from "src/composables/javascript-function/token";
 import { getCurrentInstance, onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
+export default {
+  components: {
+    ViewDetailedInformationAboutPlant,
+  },
+  setup() {
+    // global variables
+    const router = useRouter();
+    const { proxy } = getCurrentInstance();
+    const serverURL = proxy.$serverURL;
+    const maxItemsPerPage = proxy.$maxItemsPerPage;
+    const $q = useQuasar();
 
-// global variables
-const router = useRouter();
-const { proxy } = getCurrentInstance();
-const serverURL = proxy.$serverURL;
-const maxItemsPerPage = proxy.$maxItemsPerPage;
-const $q = useQuasar();
+    const pushToNofications = () => {
+      router.push("/notifications");
+    };
 
-const pushToNofications = () => {
-  router.push("/notifications");
+    const addPlant = () => {
+      router.push("/create-plant");
+    };
+
+    const pushToGuide = () => {
+      router.push("/guide");
+    };
+
+    const allInfoAboutPlant = ref([]);
+    const openWindow = ref(false);
+    const openDetailedMyPlant = (info) => {
+      allInfoAboutPlant.value = info;
+      openWindow.value = true;
+    };
+
+    const closeWindow = () => {
+      openWindow.value = false;
+    };
+
+    const allMyPlants = ref([]);
+    const getAllMyPlants = async (page) => {
+      await getMethod(
+        serverURL,
+        `user/myPlants?page=${page}&size=${maxItemsPerPage}`,
+        allMyPlants,
+        $q,
+        "Error: "
+      );
+
+      console.log(allMyPlants.value);
+    };
+
+    // pagination
+    const current = ref(1);
+    const pagination = (page) => {
+      console.log("Текущая страница:", page);
+      current.value = page;
+      console.log(current.value);
+
+      getAllMyPlants(current.value - 1);
+    };
+
+    const maxPage = ref("");
+    watch(
+      () => allMyPlants.value,
+      (newVal) => {
+        if (newVal && newVal.page.size) {
+          maxPage.value = Math.ceil(
+            newVal.page.totalElements / newVal.page.size
+          );
+        } else {
+          maxPage.value = 1;
+        }
+      }
+    );
+
+    onMounted(() => {
+      getAllMyPlants(current.value - 1);
+      checkAccessToken();
+    });
+
+    return {
+      pushToNofications,
+      addPlant,
+      pushToGuide,
+      openDetailedMyPlant,
+      allMyPlants,
+      openWindow,
+      allInfoAboutPlant,
+      closeWindow,
+      current,
+      pagination,
+      maxPage,
+    };
+  },
 };
-
-const addPlant = () => {
-  router.push("/create-plant");
-};
-
-const pushToGuide = () => {
-  router.push("/guide");
-};
-
-const allInfoAboutPlant = ref([]);
-const openWindow = ref(false);
-const openDetailedMyPlant = (info) => {
-  allInfoAboutPlant.value = info;
-  openWindow.value = true;
-};
-
-const closeWindow = () => {
-  openWindow.value = false;
-};
-
-const allMyPlants = ref([]);
-const getAllMyPlants = async (page) => {
-  await getMethod(
-    serverURL,
-    `user/myPlants?page=${page}&size=${maxItemsPerPage}`,
-    allMyPlants,
-    $q,
-    "Error: "
-  );
-
-  console.log(allMyPlants.value);
-};
-
-// pagination
-const current = ref(1);
-const pagination = (page) => {
-  console.log("Текущая страница:", page);
-  current.value = page;
-  console.log(current.value);
-
-  getAllMyPlants(current.value - 1);
-};
-
-const maxPage = ref("");
-watch(
-  () => allMyPlants.value,
-  (newVal) => {
-    if (newVal && newVal.page.size) {
-      maxPage.value = Math.ceil(newVal.page.totalElements / newVal.page.size);
-    } else {
-      maxPage.value = 1;
-    }
-  }
-);
-
-onMounted(() => {
-  getAllMyPlants(current.value - 1);
-  checkAccessToken();
-});
 </script>
 
 <style></style>
