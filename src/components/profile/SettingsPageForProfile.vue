@@ -53,6 +53,46 @@
         </q-dialog>
       </div>
     </section>
+
+    <section
+      style="background-color: #30322e; border-radius: 7px"
+      class="q-pa-sm q-my-md"
+    >
+      <div class="text-h5 q-pa-md">Help</div>
+      <div>
+        <q-list>
+          <q-item
+            clickable
+            v-ripple
+            @click="openEditPage"
+            v-for="(button, index) in helpButtons"
+            :key="index"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" :name="button.icon" />
+            </q-item-section>
+            <q-item-section>{{ button.label }}</q-item-section>
+            <q-item-section avatar left>
+              <q-icon color="white" name="mdi-arrow-right" />
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </div>
+      <div>
+        <q-dialog v-model="confirm" persistent>
+          <q-card class="text-black bg-white">
+            <q-card-section>
+              <q-input v-model="fio" type="text" label="Full name" />
+              <q-input v-model="password" type="password" label="Password" />
+            </q-card-section>
+            <q-card-actions align="right">
+              <q-btn flat label="Close" color="red-4" @click="closeWindow" />
+              <q-btn flat label="Edit" color="primary" @click="editProfile" />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
+      </div>
+    </section>
     <q-btn
       style="width: 100%"
       class="q-my-sm"
@@ -92,6 +132,29 @@ const buttons = [
     label: "Edit",
     icon: "mdi-pencil",
   },
+];
+
+const helpButtons = [
+{
+  label: "Contact us",
+  icon: "mdi-phone",
+},
+
+{
+  label: "Knowledge base / FAQ",
+  icon: "mdi-book-open",
+},
+
+{
+  label: "Terms and conditions",
+  icon: "mdi-file-document",
+},
+
+{
+  label: "About application",
+  icon: "mdi-information",
+},
+
 ];
 
 const logout = async () => {
