@@ -11,3 +11,15 @@ DOMWrapper {
   </p>,
 }
 `;
+
+exports[`tests for IndexPage > should find indexPageSubText data-testid 1`] = `
+DOMWrapper {
+  "isDisabled": [Function],
+  "wrapperElement": <span
+    class="text-body1"
+    data-testid="indexPageSubText"
+  >
+     Your plants are so glad you are here.
+  </span>,
+}
+`;

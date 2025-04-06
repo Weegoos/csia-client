@@ -16,18 +16,21 @@
       />
     </section>
     <p class="text-h5 text-bold" data-testid="indexPageMainText">Good day</p>
-    <span class="text-body1">Your plants are so glad you are here.</span>
+    <span class="text-body1" data-testid="indexPageSubText">
+      Your plants are so glad you are here.</span
+    >
     <section
       class="q-pa-sm q-my-md"
       style="background-color: #30322e; border-radius: 8px"
-      v-if="allMyPlants.content <= []"
+      v-if="allMyPlants.content && allMyPlants.content.length === 0"
+      data-testid="indexPageNoPlantsText"
     >
       <p class="text-body2 text-bold">Add your first plant</p>
       <p>
         Planta will then create a care schedule for it to make sure it thrives
       </p>
     </section>
-    <section v-else>
+    <section v-else data-testid="indexPagePlantsText">
       <div>
         <q-list bordered>
           <q-item
