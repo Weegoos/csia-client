@@ -46,4 +46,11 @@ describe("tests from RegistrationPage", () => {
     expect(emailInput.element.value).toBe("example@gmail.com");
     expect(emailInput.element.value).toMatchSnapshot();
   });
+
+  it("should find registrationCarousel data-testid", () => {
+    const registrationCarousel = wrapper.find(
+      '[data-testid="registrationCarousel"]'
+    );
+    expect(registrationCarousel.exists()).toBe(true);
+  });
 });

@@ -80,6 +80,7 @@
     </section>
     <section>
       <q-carousel
+        data-testid="registrationCarousel"
         v-model="slide"
         vertical
         transition-prev="slide-down"
