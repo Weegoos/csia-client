@@ -15,7 +15,7 @@
         @click="pushToGuide"
       />
     </section>
-    <p class="text-h5 text-bold">Good day</p>
+    <p class="text-h5 text-bold" data-testid="indexPageMainText">Good day</p>
     <span class="text-body1">Your plants are so glad you are here.</span>
     <section
       class="q-pa-sm q-my-md"
