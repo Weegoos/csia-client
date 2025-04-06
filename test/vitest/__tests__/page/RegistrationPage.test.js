@@ -17,6 +17,7 @@ describe("tests from RegistrationPage", () => {
     );
     expect(registrationMainText.exists()).toBe(true);
     expect(registrationMainText.text()).toContain("Create");
+    expect(registrationMainText).toMatchSnapshot();
   });
 
   it("should find registrationSubText data-testid", () => {
@@ -25,6 +26,7 @@ describe("tests from RegistrationPage", () => {
     );
     expect(registrationSubText.exists()).toBe(true);
     expect(registrationSubText.text()).toContain("Enter your details");
+    expect(registrationSubText).toMatchSnapshot();
   });
 
   it("should find fullNameInput data-testid", () => {
@@ -33,6 +35,7 @@ describe("tests from RegistrationPage", () => {
 
     fullNameInput.setValue("exampleFullName");
     expect(fullNameInput.element.value).toBe("exampleFullName");
+    expect(fullNameInput.element.value).toMatchSnapshot();
   });
 
   it("should find emailInput data-testid", () => {
@@ -41,5 +44,6 @@ describe("tests from RegistrationPage", () => {
 
     emailInput.setValue("example@gmail.com");
     expect(emailInput.element.value).toBe("example@gmail.com");
+    expect(emailInput.element.value).toMatchSnapshot();
   });
 });
