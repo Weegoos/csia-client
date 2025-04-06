@@ -4,11 +4,16 @@
     :class="$q.screen.width > mobileWidth ? 'fixed-center' : ''"
   >
     <section class="text-white q-mb-md">
-      <p class="text-h5 text-bold">Create account with email</p>
-      <p class="text-body2">Enter your details below to create your account</p>
+      <p class="text-h5 text-bold" data-testid="registrationMainText">
+        Create account with email
+      </p>
+      <p class="text-body2" data-testid="registrationSubText">
+        Enter your details below to create your account
+      </p>
     </section>
     <section>
       <q-input
+        data-testid="fullNameInput"
         v-model="fullName"
         placeholder="Enter your full name"
         stack-label
@@ -21,6 +26,7 @@
         outlined
       />
       <q-input
+        data-testid="emailInput"
         v-model="email"
         placeholder="Enter your email"
         stack-label
