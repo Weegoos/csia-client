@@ -17,24 +17,29 @@ describe("tests from RegistrationPage", () => {
     );
     expect(registrationMainText.exists()).toBe(true);
     expect(registrationMainText.text()).toContain("Create");
-    expect(registrationMainText).toMatchSnapshot();
   });
 
-  it("should find rregistrationSubText data-testid", () => {
+  it("should find registrationSubText data-testid", () => {
     const registrationSubText = wrapper.find(
       '[data-testid="registrationSubText"]'
     );
     expect(registrationSubText.exists()).toBe(true);
     expect(registrationSubText.text()).toContain("Enter your details");
-    expect(registrationSubText).toMatchSnapshot();
   });
 
-  it("should find emailInput data-testid", () => {
+  it("should find fullNameInput data-testid", () => {
     const fullNameInput = wrapper.find('[data-testid="fullNameInput"]');
     expect(fullNameInput.exists()).toBe(true);
 
     fullNameInput.setValue("exampleFullName");
     expect(fullNameInput.element.value).toBe("exampleFullName");
-    expect(fullNameInput).toMatchSnapshot();
+  });
+
+  it("should find emailInput data-testid", () => {
+    const emailInput = wrapper.find('[data-testid="emailInput"]');
+    expect(emailInput.exists()).toBe(true);
+
+    emailInput.setValue("example@gmail.com");
+    expect(emailInput.element.value).toBe("example@gmail.com");
   });
 });

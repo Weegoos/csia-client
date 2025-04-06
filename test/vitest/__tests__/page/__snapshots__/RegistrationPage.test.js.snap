@@ -17,6 +17,23 @@ DOMWrapper {
 }
 `;
 
+exports[`tests from RegistrationPage > should find fullNameInput data-testid 1`] = `
+DOMWrapper {
+  "isDisabled": [Function],
+  "wrapperElement": <input
+    class="q-field__native q-placeholder text-white"
+    data-testid="fullNameInput"
+    id="f_7e7659ff-48e9-4be7-82bd-79399b99f319"
+    label-class="text-white"
+    placeholder="Enter your full name"
+    style="color: white;"
+    tabindex="0"
+    type="text"
+    value=""
+  />,
+}
+`;
+
 exports[`tests from RegistrationPage > should find registrationMainText data-testid  1`] = `
 DOMWrapper {
   "isDisabled": [Function],
@@ -26,6 +43,19 @@ DOMWrapper {
     data-v-6282d38c=""
   >
      Create account with email 
+  </p>,
+}
+`;
+
+exports[`tests from RegistrationPage > should find registrationSubText data-testid 1`] = `
+DOMWrapper {
+  "isDisabled": [Function],
+  "wrapperElement": <p
+    class="text-body2"
+    data-testid="registrationSubText"
+    data-v-6282d38c=""
+  >
+     Enter your details below to create your account 
   </p>,
 }
 `;
