@@ -20,6 +20,7 @@
             <q-item
               clickable
               v-ripple
+              data-testid="plantInfoTestId"
               v-for="(plant, index) in plantInfo.content"
               :key="index"
               @click="seeDetailedInformationAboutPlant(plant)"
@@ -71,72 +72,91 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { all } from "axios";
 import { useQuasar } from "quasar";
 import PlantGuideDetailedInformation from "src/components/guide/PlantGuideDetailedInformation.vue";
 import { getMethod } from "src/composables/apiMethod/get";
 import { getCurrentInstance, onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
+export default {
+  components: {
+    PlantGuideDetailedInformation,
+  },
+  setup() {
+    // global variables
+    const router = useRouter();
+    const { proxy } = getCurrentInstance();
+    const serverURL = proxy.$serverURL;
+    const maxItemsPerPage = proxy.$maxItemsPerPage;
+    const $q = useQuasar();
 
-// global variables
-const router = useRouter();
-const { proxy } = getCurrentInstance();
-const serverURL = proxy.$serverURL;
-const maxItemsPerPage = proxy.$maxItemsPerPage;
-const $q = useQuasar();
+    const pushToMainPage = () => {
+      router.push("/");
+    };
 
-const pushToMainPage = () => {
-  router.push("/");
+    const plantInfo = ref([]);
+    const getAllPlants = async (page) => {
+      await getMethod(
+        serverURL,
+        `plant/allPlants?page=${page}&size=${maxItemsPerPage}`,
+        plantInfo,
+        $q,
+        "Error: "
+      );
+
+      console.log(page);
+    };
+
+    // see detailed information about plant
+    const isClickedToTheDetailedPage = ref(false);
+    const allInformationAboutPlant = ref([]);
+    const seeDetailedInformationAboutPlant = (info) => {
+      console.log(info);
+      isClickedToTheDetailedPage.value = true;
+      allInformationAboutPlant.value = info;
+    };
+
+    // pagination
+    const current = ref(1);
+    const pagination = (page) => {
+      console.log("Текущая страница:", page);
+      current.value = page;
+      console.log(current.value);
+
+      getAllPlants(current.value - 1);
+    };
+
+    const maxPage = ref("");
+    watch(
+      () => plantInfo.value,
+      (newVal) => {
+        if (newVal && newVal.page.size) {
+          maxPage.value = Math.ceil(
+            newVal.page.totalElements / newVal.page.size
+          );
+        } else {
+          maxPage.value = 1;
+        }
+      }
+    );
+
+    onMounted(() => {
+      getAllPlants(current.value - 1);
+    });
+
+    return {
+      pushToMainPage,
+      plantInfo,
+      seeDetailedInformationAboutPlant,
+      isClickedToTheDetailedPage,
+      allInformationAboutPlant,
+      current,
+      pagination,
+      maxPage,
+    };
+  },
 };
-
-const plantInfo = ref([]);
-const getAllPlants = async (page) => {
-  await getMethod(
-    serverURL,
-    `plant/allPlants?page=${page}&size=${maxItemsPerPage}`,
-    plantInfo,
-    $q,
-    "Error: "
-  );
-
-  console.log(page);
-};
-
-// see detailed information about plant
-const isClickedToTheDetailedPage = ref(false);
-const allInformationAboutPlant = ref([]);
-const seeDetailedInformationAboutPlant = (info) => {
-  console.log(info);
-  isClickedToTheDetailedPage.value = true;
-  allInformationAboutPlant.value = info;
-};
-
-// pagination
-const current = ref(1);
-const pagination = (page) => {
-  console.log("Текущая страница:", page);
-  current.value = page;
-  console.log(current.value);
-
-  getAllPlants(current.value - 1);
-};
-
-const maxPage = ref("");
-watch(
-  () => plantInfo.value,
-  (newVal) => {
-    if (newVal && newVal.page.size) {
-      maxPage.value = Math.ceil(newVal.page.totalElements / newVal.page.size);
-    } else {
-      maxPage.value = 1;
-    }
-  }
-);
-
-onMounted(() => {
-  getAllPlants(current.value - 1);
-});
 </script>
 
 <style></style>

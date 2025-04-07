@@ -1,6 +1,7 @@
-import { vi, beforeEach } from "vitest";
+import { vi, beforeEach, beforeAll } from "vitest";
 
 // This file will be run before each test file
+
 beforeEach(() => {
   vi.mock("src/boot/config.js", () => ({
     serverURL: "https://csia-back.onrender.com/",
@@ -32,4 +33,8 @@ beforeEach(() => {
       }),
     };
   });
+
+  vi.mock("src/composables/apiMethod/get", () => ({
+    getMethod: vi.fn().mockResolvedValue({}), // можно вернуть мок-данные
+  }));
 });
