@@ -1,11 +1,25 @@
+// 👇 СРАЗУ после импорта vitest
+beforeAll(() => {
+  global.IntersectionObserver = class {
+    constructor() {}
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  };
+});
+
+// теперь можно все импорты
 import { installQuasarPlugin } from "@quasar/quasar-app-extension-testing-unit-vitest";
-import { mount, shallowMount } from "@vue/test-utils";
+import { flushPromises, mount } from "@vue/test-utils";
 import { Quasar } from "quasar";
 import GuidePage from "src/pages/GuidePage.vue";
-import { describe, it, beforeAll, expect } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
+import { nextTick } from "vue";
 
+// Установка плагина
 installQuasarPlugin();
 
+// Тестовые данные
 let testData = {
   content: [
     {
@@ -70,15 +84,25 @@ let testData = {
   },
 };
 
-describe("tests for GuidePage", () => {
-  const wrapper = shallowMount(GuidePage, {
+// Тест
+function createWrapper() {
+  return mount(GuidePage, {
     global: {
       plugins: [Quasar],
     },
   });
+}
 
-  it("should find plantInfoTestId data-testid", () => {
+describe("tests for GuidePage", () => {
+  it("should find plantInfoTestId data-testid", async () => {
+    const wrapper = createWrapper();
+
+    wrapper.vm.plantInfo = testData;
+
+    await flushPromises();
+    await nextTick();
+
     const el = wrapper.find('[data-testid="plantInfoTestId"]');
-    // expect(el.exists()).toBe(true);
+    expect(el.exists()).toBe(true);
   });
 });

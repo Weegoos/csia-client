@@ -14,18 +14,17 @@
         <p class="text-h5 text-body">Find plant</p>
         <span class="text-body2">Idenfify plant with search</span>
       </section>
-      <section>
+      <section data-testid="plantInfoTestId">
         <q-intersection transition="flip-right" class="example-item">
           <q-list bordered>
             <q-item
               clickable
               v-ripple
-              data-testid="plantInfoTestId"
               v-for="(plant, index) in plantInfo.content"
               :key="index"
               @click="seeDetailedInformationAboutPlant(plant)"
             >
-              <q-item-section avatar>
+              <q-item-section avatar data-testid="itemSection">
                 <q-icon color="green-4" name="mdi-leaf" />
               </q-item-section>
               <q-item-section>
