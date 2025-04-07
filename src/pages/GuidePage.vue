@@ -20,11 +20,12 @@
             <q-item
               clickable
               v-ripple
+              data-testid="itemSection"
               v-for="(plant, index) in plantInfo.content"
               :key="index"
               @click="seeDetailedInformationAboutPlant(plant)"
             >
-              <q-item-section avatar data-testid="itemSection">
+              <q-item-section avatar>
                 <q-icon color="green-4" name="mdi-leaf" />
               </q-item-section>
               <q-item-section>

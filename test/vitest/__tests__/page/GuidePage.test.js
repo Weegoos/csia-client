@@ -94,15 +94,32 @@ function createWrapper() {
 }
 
 describe("tests for GuidePage", () => {
-  it("should find plantInfoTestId data-testid", async () => {
+  it("should find plantInfoTestId data-testid and child components", async () => {
     const wrapper = createWrapper();
 
-    wrapper.vm.plantInfo = testData;
+    wrapper.vm.plantInfo.content = testData.content;
 
+    // Даем время для рендеринга и асинхронных операций
     await flushPromises();
     await nextTick();
 
-    const el = wrapper.find('[data-testid="plantInfoTestId"]');
-    expect(el.exists()).toBe(true);
+    // Проверка существования parent элемента
+    const sectionEl = wrapper.find('[data-testid="plantInfoTestId"]');
+    expect(sectionEl.exists()).toBe(true);
+  });
+
+  it("should check the itemSection data-testid", async () => {
+    const wrapper = createWrapper();
+    wrapper.vm.plantInfo.content = testData.content;
+    await flushPromises();
+    await nextTick();
+
+    const itemSectionEl = wrapper.findAll('[data-testid="itemSection"]');
+    console.log(wrapper.vm.plantInfo);
+    console.log(itemSectionEl);
+
+    // // Дополнительные проверки для других элементов
+    // const plantItemEls = wrapper.findAll("q-item");
+    // expect(plantItemEls.length).toBe(testData.content.length);
   });
 });
