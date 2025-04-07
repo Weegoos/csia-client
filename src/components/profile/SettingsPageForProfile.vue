@@ -21,17 +21,20 @@
       <div class="text-h5 q-pa-md">General</div>
       <div>
         <q-list>
-          <q-item
-            clickable
-            v-ripple
-            @click="openEditPage"
-            v-for="(button, index) in buttons"
-            :key="index"
-          >
+          <q-item clickable v-ripple @click="openAccountPage()">
             <q-item-section avatar>
-              <q-icon color="white" :name="button.icon" />
+              <q-icon color="white" name="mdi-account" />
             </q-item-section>
-            <q-item-section>{{ button.label }}</q-item-section>
+            <q-item-section>Account</q-item-section>
+            <q-item-section avatar left>
+              <q-icon color="white" name="mdi-arrow-right" />
+            </q-item-section>
+          </q-item>
+          <q-item clickable v-ripple @click="openEditPage()">
+            <q-item-section avatar>
+              <q-icon color="white" name="mdi-pencil" />
+            </q-item-section>
+            <q-item-section>Edit</q-item-section>
             <q-item-section avatar left>
               <q-icon color="white" name="mdi-arrow-right" />
             </q-item-section>
@@ -122,39 +125,26 @@ const pushToPlants = () => {
   router.push("/plants");
 };
 
-const buttons = [
-  {
-    label: "Account",
-    icon: "mdi-account",
-  },
-
-  {
-    label: "Edit",
-    icon: "mdi-pencil",
-  },
-];
-
 const helpButtons = [
-{
-  label: "Contact us",
-  icon: "mdi-phone",
-},
+  {
+    label: "Contact us",
+    icon: "mdi-phone",
+  },
 
-{
-  label: "Knowledge base / FAQ",
-  icon: "mdi-book-open",
-},
+  {
+    label: "Knowledge base / FAQ",
+    icon: "mdi-book-open",
+  },
 
-{
-  label: "Terms and conditions",
-  icon: "mdi-file-document",
-},
+  {
+    label: "Terms and conditions",
+    icon: "mdi-file-document",
+  },
 
-{
-  label: "About application",
-  icon: "mdi-information",
-},
-
+  {
+    label: "About application",
+    icon: "mdi-information",
+  },
 ];
 
 const logout = async () => {
@@ -178,6 +168,10 @@ const closeWindow = () => {
 
 const fio = ref("");
 const password = ref("");
+
+const openAccountPage = () => {
+  router.push("/profile/account");
+};
 
 const editProfile = async () => {
   try {
