@@ -23,7 +23,11 @@
         <q-list>
           <q-item clickable v-ripple @click="openAccountPage()">
             <q-item-section avatar>
-              <q-icon color="white" name="mdi-account" />
+              <q-icon
+                class="generalIconStyle q-pa-sm"
+                color="green-4"
+                name="mdi-account"
+              />
             </q-item-section>
             <q-item-section>Account</q-item-section>
             <q-item-section avatar left>
@@ -32,7 +36,11 @@
           </q-item>
           <q-item clickable v-ripple @click="openEditPage()">
             <q-item-section avatar>
-              <q-icon color="white" name="mdi-pencil" />
+              <q-icon
+                class="generalIconStyle q-pa-sm"
+                color="green-4"
+                name="mdi-pencil"
+              />
             </q-item-section>
             <q-item-section>Edit</q-item-section>
             <q-item-section avatar left>
@@ -72,7 +80,11 @@
             :key="index"
           >
             <q-item-section avatar>
-              <q-icon color="white" :name="button.icon" />
+              <q-icon
+                class="generalIconStyle q-pa-sm"
+                color="green-4"
+                :name="button.icon"
+              />
             </q-item-section>
             <q-item-section>{{ button.label }}</q-item-section>
             <q-item-section avatar left>
