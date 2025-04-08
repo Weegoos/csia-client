@@ -27,6 +27,10 @@ const routes = [
     component: () => import("components/profile/TermsAndConditionsPage.vue"),
   },
   {
+    path: "/profile/about",
+    component: () => import("components/profile/AboutApplicationPage.vue"),
+  },
+  {
     path: "/plants",
     component: () => import("pages/PlantsPage.vue"),
   },

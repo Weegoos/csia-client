@@ -162,6 +162,7 @@ const helpButtons = [
   {
     label: "About application",
     icon: "mdi-information",
+    link: "/profile/about",
   },
 ];
 
