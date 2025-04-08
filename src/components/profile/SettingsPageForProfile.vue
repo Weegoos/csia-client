@@ -150,6 +150,7 @@ const helpButtons = [
   {
     label: "Knowledge base / FAQ",
     icon: "mdi-book-open",
+    link: "/profile/faq",
   },
 
   {
