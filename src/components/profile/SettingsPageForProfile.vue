@@ -75,9 +75,9 @@
           <q-item
             clickable
             v-ripple
-            @click="openEditPage"
             v-for="(button, index) in helpButtons"
             :key="index"
+            @click="pushToLink(button.link)"
           >
             <q-item-section avatar>
               <q-icon
@@ -123,7 +123,6 @@
 <script setup>
 import { Cookies, useQuasar } from "quasar";
 import axios from "axios";
-import { patchMethod } from "src/composables/apiMethod/patch";
 import { checkAccessToken } from "src/composables/javascript-function/token";
 import { getCurrentInstance, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -137,10 +136,15 @@ const pushToPlants = () => {
   router.push("/plants");
 };
 
+const pushToLink = (link) => {
+  router.push(link);
+};
+
 const helpButtons = [
   {
     label: "Contact us",
     icon: "mdi-phone",
+    link: "/profile/contact",
   },
 
   {
