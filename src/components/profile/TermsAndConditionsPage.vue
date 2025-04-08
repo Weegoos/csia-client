@@ -1,8 +1,14 @@
 <template>
   <div>
-    <section class="q-my-md">
-      <q-btn icon="mdi-arrow-left" @click="pushToProfile" />
-      <p class="q-pa-md text-h5 text-bold">Terms and Conditions</p>
+    <section data-testid="termsWrapperTestID" class="q-my-md">
+      <q-btn
+        data-testid="pushToProfileTestID"
+        icon="mdi-arrow-left"
+        @click="pushToProfile"
+      />
+      <p class="q-pa-md text-h5 text-bold" data-testid="termsMainText">
+        Terms and Conditions
+      </p>
     </section>
     <section
       style="background-color: #30322e; border-radius: 7px"
