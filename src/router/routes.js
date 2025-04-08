@@ -23,6 +23,10 @@ const routes = [
     component: () => import("components/profile/FAQPage.vue"),
   },
   {
+    path: "/profile/terms",
+    component: () => import("components/profile/TermsAndConditionsPage.vue"),
+  },
+  {
     path: "/plants",
     component: () => import("pages/PlantsPage.vue"),
   },

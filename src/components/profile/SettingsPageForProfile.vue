@@ -156,6 +156,7 @@ const helpButtons = [
   {
     label: "Terms and conditions",
     icon: "mdi-file-document",
+    link: "profile/terms",
   },
 
   {
