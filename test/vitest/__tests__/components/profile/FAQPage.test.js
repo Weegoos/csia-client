@@ -4,5 +4,5 @@ import { describe, it } from "vitest";
 installQuasarPlugin();
 
 describe("tests for FAQPage", () => {
-  it("");
+  it("should i");
 });
