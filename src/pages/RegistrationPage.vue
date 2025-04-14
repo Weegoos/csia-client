@@ -5,17 +5,17 @@
   >
     <section class="text-white q-mb-md">
       <p class="text-h5 text-bold" data-testid="registrationMainText">
-        Create account with email
+        {{ t("registration.mainText") }}
       </p>
       <p class="text-body2" data-testid="registrationSubText">
-        Enter your details below to create your account
+        {{ t("registration.captionText") }}
       </p>
     </section>
     <section>
       <q-input
         data-testid="fullNameInput"
         v-model="fullName"
-        placeholder="Enter your full name"
+        :placeholder="t('registration.fullNameText')"
         stack-label
         class="text-white q-my-md input"
         color="white"
@@ -28,7 +28,7 @@
       <q-input
         data-testid="emailInput"
         v-model="email"
-        placeholder="Enter your email"
+        :placeholder="t('registration.emailText')"
         stack-label
         class="text-white input q-my-md"
         color="white"
@@ -41,7 +41,7 @@
       <q-input
         v-model="password"
         :type="isPwd ? 'password' : 'text'"
-        placeholder="Enter your password"
+        :placeholder="t('registration.passwordText')"
         stack-label
         class="text-white input q-my-md"
         color="white"
@@ -65,7 +65,7 @@
         style="width: 100%"
         rounded
         no-caps
-        label="Sign up with email"
+        :label="t('registration.signupWithEmail')"
         @click="register"
       />
       <q-btn
@@ -74,7 +74,7 @@
         rounded
         no-caps
         class="q-my-md"
-        label="Sign in with email"
+        :label="t('registration.signinWithEmail')"
         @click="pushToLogin"
       />
     </section>
@@ -97,24 +97,43 @@
           <q-icon name="mdi-account" size="56px" />
 
           <div class="q-mt-md text-center">
-            Be sure to write the full name for the accuracy of the information.
+            {{ t("registration.carousel.block1.text") }}
           </div>
         </q-carousel-slide>
         <q-carousel-slide name="email" class="column no-wrap flex-center">
           <q-icon name="email" size="56px" />
           <div class="q-mt-md text-center">
-            Use work email to work with the app.
+            {{ t("registration.carousel.block2.text") }}
           </div>
         </q-carousel-slide>
         <q-carousel-slide name="password" class="column no-wrap flex-center">
           <q-icon name="mdi-lock-outline" size="56px" />
 
           <div class="q-mt-md text-center">
-            The password must consist of 6 characters.
+            {{ t("registration.carousel.block2.text") }}
           </div>
         </q-carousel-slide>
       </q-carousel>
     </section>
+    <q-btn-dropdown
+      class="fixed-bottom-right q-mb-md"
+      :class="$q.screen.width < mobileWidth ? 'q-mx-md' : 'q-mx-lg'"
+      color="black"
+      rounded
+      icon="mdi-web"
+    >
+      <q-list class="bg-black" v-for="(lang, index) in options" :key="index">
+        <q-item
+          clickable
+          v-close-popup
+          @click="() => selectLanguage(lang.value)"
+        >
+          <q-item-section>
+            <q-item-label>{{ lang.label }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-btn-dropdown>
   </div>
 </template>
 
@@ -123,6 +142,7 @@ import axios from "axios";
 import { useQuasar } from "quasar";
 import { useNotifyStore } from "src/stores/notify-store";
 import { getCurrentInstance, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 export default {
   setup() {
@@ -133,6 +153,7 @@ export default {
     const mobileWidth = proxy.$mobileWidth;
     const notifyStore = useNotifyStore();
     const $q = useQuasar();
+    const { t, locale } = useI18n();
 
     const isPwd = ref(true);
     const fullName = ref("");
@@ -164,6 +185,19 @@ export default {
       router.push("/login");
     };
 
+    const language = ref(locale.value);
+    const options = [
+      { label: "Русский", value: "ru-RU" },
+      { label: "English", value: "en-US" },
+      { label: "Қазақша", value: "kz-KZ" },
+    ];
+
+    const selectLanguage = (val) => {
+      language.value = val;
+      locale.value = val;
+      localStorage.setItem("locale", val);
+    };
+
     return {
       mobileWidth,
       isPwd,
@@ -173,6 +207,10 @@ export default {
       slide,
       register,
       pushToLogin,
+      t,
+      options,
+      locale,
+      selectLanguage,
     };
   },
 };
