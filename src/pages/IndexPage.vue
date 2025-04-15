@@ -13,6 +13,13 @@
         round
         icon="mdi-book-open-outline"
         @click="pushToGuide"
+        class="q-mr-sm"
+      />
+      <q-btn
+        style="background-color: #30322e"
+        round
+        icon="mdi-account-check"
+        @click="pushToAdminPage"
       />
     </section>
     <p class="text-h5 text-bold" data-testid="indexPageMainText">Good day</p>
@@ -171,6 +178,10 @@ export default {
       checkAccessToken();
     });
 
+    const pushToAdminPage = () => {
+      router.push("/admin/users");
+    };
+
     return {
       pushToNofications,
       addPlant,
@@ -183,6 +194,7 @@ export default {
       current,
       pagination,
       maxPage,
+      pushToAdminPage,
     };
   },
 };

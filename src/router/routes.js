@@ -70,6 +70,10 @@ const routes = [
     path: "/add-plant",
     component: () => import("components/plants/CreatePlant.vue"),
   },
+  {
+    path: "/admin/users",
+    component: () => import("components/admin/AllUsers.vue"),
+  },
 
   // Always leave this as last one,
   // but you can also remove it

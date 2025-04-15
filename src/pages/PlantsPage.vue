@@ -3,8 +3,10 @@
     <q-btn icon="settings" round @click="pushToSettings" />
   </div>
   <div class="q-col-gutter-md row items-start">
-    <div class="col q-my-sm">
-      <q-img style="border-radius: 5px" :src="img" no-native-menu> </q-img>
+    <div class="col q-my-sm" align="center">
+      <q-avatar round size="100px">
+        <img :src="img" />
+      </q-avatar>
     </div>
   </div>
   <div>
