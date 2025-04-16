@@ -22,19 +22,21 @@
         @click="pushToAdminPage"
       />
     </section>
-    <p class="text-h5 text-bold" data-testid="indexPageMainText">Good day</p>
+    <p class="text-h5 text-bold" data-testid="indexPageMainText">
+      {{ t("indexPage.mainText") }}
+    </p>
     <span class="text-body1" data-testid="indexPageSubText">
-      Your plants are so glad you are here.</span
-    >
+      {{ t("indexPage.captionText") }}
+    </span>
     <section
       class="q-pa-sm q-my-md"
       style="background-color: #30322e; border-radius: 8px"
       v-if="allMyPlants.content && allMyPlants.content.length === 0"
       data-testid="indexPageNoPlantsText"
     >
-      <p class="text-body2 text-bold">Add your first plant</p>
+      <p class="text-body2 text-bold">{{ t("indexPage.addPlant") }}</p>
       <p>
-        Planta will then create a care schedule for it to make sure it thrives
+        {{ t("indexPage.buttonCaptionText") }}
       </p>
     </section>
     <section v-else data-testid="indexPagePlantsText">
@@ -58,7 +60,7 @@
                 plant.substrate
               }}</q-item-label>
               <q-item-label class="text-white" caption lines="2">
-                Collect time:
+                {{ t("indexPage.collectTime") }}:
                 {{ plant.collectTime }}
               </q-item-label>
             </q-item-section>
@@ -82,7 +84,7 @@
       color="green-4 q-mt-md"
       rounded
       style="width: 100%"
-      label="Add plant"
+      :label="t('indexPage.addPlantBtnLabel')"
       no-caps
       @click="addPlant"
     />
@@ -101,6 +103,7 @@ import ViewDetailedInformationAboutPlant from "../components/myPlant/ViewDetaile
 import { checkAccessToken } from "src/composables/javascript-function/token";
 import { getCurrentInstance, onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 export default {
   components: {
     ViewDetailedInformationAboutPlant,
@@ -112,6 +115,7 @@ export default {
     const serverURL = proxy.$serverURL;
     const maxItemsPerPage = proxy.$maxItemsPerPage;
     const $q = useQuasar();
+    const { t } = useI18n();
 
     const pushToNofications = () => {
       router.push("/notifications");
@@ -195,6 +199,7 @@ export default {
       pagination,
       maxPage,
       pushToAdminPage,
+      t,
     };
   },
 };

@@ -32,6 +32,15 @@ export default {
         },
       },
     },
+    indexPage: {
+      mainText: "Good day",
+      captionText: "Your plants are so glad you are here.",
+      addPlant: "Add your first plant",
+      buttonCaptionText:
+        "Planta will then create a care schedule for it to make sure it thrives",
+      collectTime: "Collect time",
+      addPlantBtnLabel: "Add plant",
+    },
   },
   "ru-RU": ruRU,
   "kz-KZ": kzKZ,

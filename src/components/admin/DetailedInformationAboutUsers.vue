@@ -1,9 +1,32 @@
 <template>
   <div>
     <q-dialog v-model="confirm" persistent>
-      <q-card dark>
-        <q-card-section class="row items-center">
-          {{ props.allInfoAboutUser }}
+      <q-card dark style="width: 800px">
+        <q-card-section>
+          <div>
+            <span class="infoHeadline">Full Name: </span>
+            <p class="infoStyle">{{ props.allInfoAboutUser.fio }}</p>
+          </div>
+          <div>
+            <span class="infoHeadline">Username: </span>
+            <p class="infoStyle">{{ props.allInfoAboutUser.username }}</p>
+          </div>
+          <div>
+            <span class="infoHeadline">Email: </span>
+            <p class="infoStyle">{{ props.allInfoAboutUser.email }}</p>
+          </div>
+          <div>
+            <span class="infoHeadline">Role: </span>
+            <p class="infoStyle">{{ props.allInfoAboutUser.role.name }}</p>
+          </div>
+          <div>
+            <span class="infoHeadline">Level: </span>
+            <p class="infoStyle">{{ props.allInfoAboutUser.level }}</p>
+          </div>
+          <div>
+            <span class="infoHeadline">Number of plants: </span>
+            <p class="infoStyle">{{ props.allInfoAboutUser.plants.length }}</p>
+          </div>
         </q-card-section>
         <q-card-actions align="right">
           <q-btn

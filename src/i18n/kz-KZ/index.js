@@ -27,4 +27,13 @@ export default {
       },
     },
   },
+  indexPage: {
+    mainText: "Қайырлы күн",
+    captionText: "Сіздің өсімдіктеріңіз сізді көріп қуанышты.",
+    addPlant: "Алғашқы өсімдігіңізді қосыңыз",
+    buttonCaptionText:
+      "Planta оған күтім жасау кестесін құрып, жақсы өсуіне көмектеседі",
+    collectTime: "Жинау уақыты",
+    addPlantBtnLabel: "Өсімдік қосу",
+  },
 };

@@ -28,4 +28,12 @@ export default {
       },
     },
   },
+  indexPage: {
+    mainText: "Добрый день",
+    captionText: "Ваши растения рады, что вы здесь.",
+    addPlant: "Добавьте своё первое растение",
+    buttonCaptionText: "Planta создаст график ухода, чтобы оно процветало",
+    collectTime: "Время сбора",
+    addPlantBtnLabel: "Добавить растение",
+  },
 };
