@@ -3,6 +3,15 @@
     <section v-if="isClicked === true">
       <q-btn icon="mdi-arrow-left" @click="goToTheWrapper" />
     </section>
+    <q-img
+      v-if="imageSrc"
+      :src="imageSrc"
+      style="border-radius: 7px"
+      :ratio="16 / 9"
+      spinner-color="primary"
+      spinner-size="82px"
+    />
+    <div v-else>Загрузка...</div>
     <section class="info">
       <span class="text-h4 text-body">{{ allInformationAboutPlant.name }}</span
       ><br />
@@ -321,8 +330,12 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import axios from "axios";
+import JSZip from "jszip";
+import { Cookies } from "quasar";
+import { getCurrentInstance, onMounted, ref, watch } from "vue";
 
+// global variables
 const props = defineProps({
   isClickedToTheDetailedPage: {
     type: Boolean,
@@ -333,6 +346,8 @@ const props = defineProps({
     default: () => ({}),
   },
 });
+const { proxy } = getCurrentInstance();
+const serverURL = proxy.$serverURL;
 
 const isClicked = ref(props.isClickedToTheDetailedPage);
 watch(
@@ -341,6 +356,36 @@ watch(
     isClicked.value = newValue;
   }
 );
+
+const imageSrc = ref(null);
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${serverURL}plant/images?fileIds=${props.allInformationAboutPlant.images[0]}`,
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("accessToken")}`,
+        },
+        responseType: "blob",
+      }
+    );
+
+    const zip = await JSZip.loadAsync(response.data);
+    const files = Object.keys(zip.files);
+    console.log("ZIP содержимое:", files);
+
+    for (const fileName of files) {
+      const file = zip.files[fileName];
+      if (!file.dir && file.name.match(/\.(jpg|jpeg|png|gif|jfif)$/i)) {
+        const blob = await file.async("blob");
+        imageSrc.value = URL.createObjectURL(blob);
+        break;
+      }
+    }
+  } catch (error) {
+    console.error("Ошибка при извлечении изображения из ZIP:", error);
+  }
+});
 
 const emit = defineEmits(["goToTheWrapper"]);
 const goToTheWrapper = () => {
