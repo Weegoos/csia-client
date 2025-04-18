@@ -1,7 +1,7 @@
 // src/boot/config.js
 export default ({ app }) => {
   const serverURL = "https://csia-back.onrender.com/";
-  const clientURL = "http://localhost:9000/#/";
+  const clientURL = "https://kazplant.netlify.app/#/";
   const maxItemsPerPage = 10;
   const mobileWidth = 800;
 
