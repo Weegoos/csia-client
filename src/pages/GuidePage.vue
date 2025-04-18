@@ -51,8 +51,16 @@
             </q-item>
           </q-list>
         </q-intersection>
+        <q-btn
+          color="green-4"
+          rounded
+          no-caps
+          style="width: 100%"
+          label="Add new plant"
+          @click="openBlockForAddingPlant"
+        />
         <q-pagination
-          class="justify-center"
+          class="justify-center q-mt-sm"
           v-model="current"
           color="green-4"
           :min="1"
@@ -144,6 +152,8 @@ export default {
     onMounted(() => {
       getAllPlants(current.value - 1);
     });
+
+    const openBlockForAddingPlant = () => {};
 
     return {
       pushToMainPage,

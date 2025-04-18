@@ -169,7 +169,6 @@
         </q-tab-panels>
         <q-card-actions align="right">
           <q-btn flat label="Close" color="primary" @click="closeWindow" />
-          <q-btn flat label="Turn on Wifi" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>
