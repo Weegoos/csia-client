@@ -5,7 +5,7 @@ import { vi, beforeEach, beforeAll } from "vitest";
 beforeEach(() => {
   vi.mock("src/boot/config.js", () => ({
     serverURL: "https://csia-back.onrender.com/",
-    clientURL: "https://kazplant.netlify.app/#/",
+    clientURL: "https://kaz-planta.netlify.app/#/",
     maxItemsPerPage: 10,
     mobileWidth: 800,
   }));

@@ -4,7 +4,7 @@ export function checkAccessToken() {
   const accessToken = Cookies.get("accessToken");
   const refreshToken = Cookies.get("refreshToken");
   if (!accessToken || !refreshToken) {
-    window.location.href = "https://kazplant.netlify.app/#/login";
+    window.location.href = "https://kaz-planta.netlify.app/#/login";
     return false;
   }
   return true;
